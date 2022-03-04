@@ -1,6 +1,15 @@
 var vURL = "https://api.github.com/users/vishalmangla/git-it-done/issues"
 var issueContainerEl = document.querySelector("#issue-container");
 var limitWarningEl = document.querySelector("#limit-remaining");
+var repoNameEl = document.querySelector("#repo-name");
+
+
+
+
+
+
+
+
 var getRepoIssues =function (repo) {
     var apiUrl = "https://api.github.com/repos/" + repo + "/issues?direction=asc";
     fetch(apiUrl).then (function(response){
@@ -71,4 +80,12 @@ var displayIssues = function(issues){
       }
 
 };
-getRepoIssues("facebook/react");
+
+var getRepoName = function() {
+    var queryString = document.location.search;
+    var repoName = queryString.split("=")[1];
+    getRepoIssues(repoName);
+    repoNameEl.textContent = repoName;   
+}
+
+getRepoName();
